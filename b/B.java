@@ -8,12 +8,38 @@ import java.util.stream.Collectors;
 public class B {
 
     void solve() {
-        int a = in.nextInt();
-        int b = in.nextInt();
-        out.println(a+b);
+        String a = in.nextLine();
+        int n = a.length();
+        String ans = "~~";
+        for (int i = 0; i < n - 1; i++) {
+            if (a.charAt(i) == a.charAt(i+1)){
+                String tmp = a.substring(i,i+2);
+                if (tmp.compareTo(ans) < 0){
+                    ans = tmp;
+                }
+            }
+        }
+        if (!ans.equals("~~")){
+            out.println(ans);
+            return;
+        }
+        ans = "~~~";
+        for (int i = 0; i < n - 2; i++) {
+            if (a.charAt(i) == a.charAt(i+2)){
+                String tmp = a.substring(i,i+3);
+                if (tmp.compareTo(ans) < 0){
+                    ans = tmp;
+                }
+            }
+        }
+        if (!ans.equals("~~~")){
+            out.println(ans);
+            return;
+        }
+        out.println(-1);
     }
 
-    static final boolean MULTI_TEST = true;
+    static final boolean MULTI_TEST = false;
 
     // --------------------------------------------------------------------------------------------------------------
     // --------------------------------------------------HELPER------------------------------------------------------

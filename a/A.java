@@ -1,19 +1,27 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class A {
 
     void solve() {
-        int a = in.nextInt();
-        int b = in.nextInt();
-        out.println(a+b);
+        Set<Integer> a = Arrays.stream(in.nextInts(10)).boxed().collect(Collectors.toSet());
+        int n = in.nextInt();
+        for (int i = 0; i < n; i++) {
+            int[] b = in.nextInts(6);
+            int count = 0;
+            for (int el : b) {
+                if (a.contains(el)) count++;
+            }
+            if (count >= 3){
+                out.println("Lucky");
+            }else{
+                out.println("Unlucky");
+            }
+        }
     }
 
-    static final boolean MULTI_TEST = true;
+    static final boolean MULTI_TEST = false;
 
     // --------------------------------------------------------------------------------------------------------------
     // --------------------------------------------------HELPER------------------------------------------------------
