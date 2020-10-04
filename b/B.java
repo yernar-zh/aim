@@ -7,38 +7,18 @@ import java.util.stream.Collectors;
 
 public class B {
 
+    void solve() {
+        int a = in.nextInt();
+        int b = in.nextInt();
+        out.println(a+b);
+    }
+
     static final boolean MULTI_TEST = true;
-    static int MOD = 1000000007;
 
     // --------------------------------------------------------------------------------------------------------------
     // --------------------------------------------------HELPER------------------------------------------------------
     // --------------------------------------------------------------------------------------------------------------
-    public MyScanner in;
 
-    // --------------------ALGORITHM-------------------------
-    public MyWriter out;
-    public Benchmark bm;
-
-    /**
-     * add `-Xss256m` to increase stack size
-     */
-    public static void main(String[] args) {
-        boolean local = args.length > 0;
-        String input = local ? "b/b.in" : null;
-
-        B m = new B();
-        m.in = new MyScanner(input);
-        m.out = MyWriter.of(null);
-        m.bm = new Benchmark();
-        m.run();
-        m.out.close();
-    }
-
-    void solve() {
-        int a = in.nextInt();
-        int b = in.nextInt();
-        out.println(a + b);
-    }
 
     void run() {
         if (MULTI_TEST) {
@@ -51,15 +31,16 @@ public class B {
         }
     }
 
+    // --------------------ALGORITHM-------------------------
+
+    static int MOD = 1000000007;
+
     public void sort(int[] arr) {
         List<Integer> tmp = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
         for (int i = 0; i < arr.length; i++) {
             arr[i] = tmp.get(i);
         }
     }
-
-
-    // --------------------MAIN-------------------------
 
     public void sortRev(int[] arr) {
         List<Integer> tmp = Arrays.stream(arr).boxed().sorted(Comparator.comparing((Integer x) -> x).reversed())
@@ -148,14 +129,6 @@ public class B {
     // --------------------WRITER-------------------------
     public static class MyWriter extends PrintWriter {
 
-        public MyWriter(FileWriter fileWriter) {
-            super(fileWriter);
-        }
-
-        public MyWriter(OutputStream out) {
-            super(out);
-        }
-
         public static MyWriter of(String fileName) {
             if (fileName != null) {
                 try {
@@ -166,6 +139,14 @@ public class B {
             } else {
                 return new MyWriter(new BufferedOutputStream(System.out));
             }
+        }
+
+        public MyWriter(FileWriter fileWriter) {
+            super(fileWriter);
+        }
+
+        public MyWriter(OutputStream out) {
+            super(out);
         }
 
         void println(int[] arr) {
@@ -190,5 +171,27 @@ public class B {
             return tmp;
         }
 
+    }
+
+
+    // --------------------MAIN-------------------------
+
+    public MyScanner in;
+    public MyWriter out;
+    public Benchmark bm;
+
+    /**
+     * add `-Xss256m` to increase stack size
+     */
+    public static void main(String[] args) {
+        boolean local = args.length > 0;
+        String input = local ? "b/b.in" : null;
+
+        B m = new B();
+        m.in = new MyScanner(input);
+        m.out = MyWriter.of(null);
+        m.bm = new Benchmark();
+        m.run();
+        m.out.close();
     }
 }

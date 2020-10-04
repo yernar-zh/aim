@@ -5,41 +5,20 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-
 public class A {
-
-    static final boolean MULTI_TEST = true;
-    static int MOD = 1000000007;
-
-    // --------------------------------------------------------------------------------------------------------------
-    // --------------------------------------------------HELPER------------------------------------------------------
-    // --------------------------------------------------------------------------------------------------------------
-    public MyScanner in;
-
-    // --------------------ALGORITHM-------------------------
-    public MyWriter out;
-    public Benchmark bm;
-
-    /**
-     * add `-Xss256m` to increase stack size
-     */
-    public static void main(String[] args) {
-        boolean local = args.length > 0;
-        String input = local ? "a/a.in" : null;
-
-        A m = new A();
-        m.in = new MyScanner(input);
-        m.out = MyWriter.of(null);
-        m.bm = new Benchmark();
-        m.run();
-        m.out.close();
-    }
 
     void solve() {
         int a = in.nextInt();
         int b = in.nextInt();
-        out.println(a + b);
+        out.println(a+b);
     }
+
+    static final boolean MULTI_TEST = true;
+
+    // --------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------HELPER------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------
+
 
     void run() {
         if (MULTI_TEST) {
@@ -52,15 +31,16 @@ public class A {
         }
     }
 
+    // --------------------ALGORITHM-------------------------
+
+    static int MOD = 1000000007;
+
     public void sort(int[] arr) {
         List<Integer> tmp = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
         for (int i = 0; i < arr.length; i++) {
             arr[i] = tmp.get(i);
         }
     }
-
-
-    // --------------------MAIN-------------------------
 
     public void sortRev(int[] arr) {
         List<Integer> tmp = Arrays.stream(arr).boxed().sorted(Comparator.comparing((Integer x) -> x).reversed())
@@ -149,14 +129,6 @@ public class A {
     // --------------------WRITER-------------------------
     public static class MyWriter extends PrintWriter {
 
-        public MyWriter(FileWriter fileWriter) {
-            super(fileWriter);
-        }
-
-        public MyWriter(OutputStream out) {
-            super(out);
-        }
-
         public static MyWriter of(String fileName) {
             if (fileName != null) {
                 try {
@@ -167,6 +139,14 @@ public class A {
             } else {
                 return new MyWriter(new BufferedOutputStream(System.out));
             }
+        }
+
+        public MyWriter(FileWriter fileWriter) {
+            super(fileWriter);
+        }
+
+        public MyWriter(OutputStream out) {
+            super(out);
         }
 
         void println(int[] arr) {
@@ -191,5 +171,27 @@ public class A {
             return tmp;
         }
 
+    }
+
+
+    // --------------------MAIN-------------------------
+
+    public MyScanner in;
+    public MyWriter out;
+    public Benchmark bm;
+
+    /**
+     * add `-Xss256m` to increase stack size
+     */
+    public static void main(String[] args) {
+        boolean local = args.length > 0;
+        String input = local ? "a/a.in" : null;
+
+        A m = new A();
+        m.in = new MyScanner(input);
+        m.out = MyWriter.of(null);
+        m.bm = new Benchmark();
+        m.run();
+        m.out.close();
     }
 }
