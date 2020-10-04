@@ -1,19 +1,71 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class C {
+    class Node {
+        long x;
+        long y;
 
-    void solve() {
-        int a = in.nextInt();
-        int b = in.nextInt();
-        out.println(a+b);
+        public Node(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return x == node.x &&
+                    y == node.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+    }
+    
+    boolean collinear(Node a0, Node a1, Node a2){
+        long part1 = (a0.x - a2.x) * (a1.y - a0.y);
+        long part2 = (a1.x - a0.x) * (a0.y - a2.y);
+        return part1 == part2;
     }
 
-    static final boolean MULTI_TEST = true;
+    void solve() {
+        int n = in.nextInt();
+        Set<Node> aSet = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            int t = in.nextInt();
+            if (t == 0) {
+                in.nextInt();
+                int x = in.nextInt();
+                int y = in.nextInt();
+                aSet.add(new Node(x * 2, y * 2));
+            } else {
+                int x1 = in.nextInt();
+                int y1 = in.nextInt();
+                in.nextInt();
+                in.nextInt();
+                int x3 = in.nextInt();
+                int y3 = in.nextInt();
+                in.nextInt();
+                in.nextInt();
+                aSet.add(new Node(x1 + x3, y1 + y3));
+            }
+        }
+        List<Node> a = new ArrayList<>(aSet);
+        for (int i = 2; i < a.size(); i++) {
+            if (!collinear(a.get(0), a.get(1), a.get(i))) {
+                out.println("No");
+                return;
+            }
+        }
+        out.println("Yes");
+    }
+
+    static final boolean MULTI_TEST = false;
 
     // --------------------------------------------------------------------------------------------------------------
     // --------------------------------------------------HELPER------------------------------------------------------
